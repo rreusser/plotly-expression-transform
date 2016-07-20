@@ -1,0 +1,43 @@
+{
+  "name": "plotly-expression-transform",
+  "version": "1.0.0",
+  "description": "A plotly transform for evaluating arbitrary functions",
+  "main": "index.js",
+  "author": {
+    "name": "Ricky Reusser",
+    "email": "rsreusser@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rreusser/plotly-expression-transform.git"
+  },
+  "scripts": {
+    "start": "budo-less www/index.js:bundle.js --less=www/style.less --live --open --dir www | garnish",
+    "test": "semistandard && mocha",
+    "build:clean": "rm -rf dist",
+    "build:js": "browserify www/index.js | uglifyjs -cm > dist/bundle.js",
+    "build:html": "cp www/index.html dist/index.html",
+    "build:css": "lessc www/style.less dist/style.css",
+    "build": "mkdir -p dist && npm run build:html && npm run build:js && npm run build:css",
+    "deploy": "gh-pages -d dist"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "budo-less": "^1.0.1",
+    "chai": "^3.5.0",
+    "garnish": "^5.2.0",
+    "mocha": "^2.5.3",
+    "plotly.js": "file:../plotly.js"
+  },
+  "dependencies": {
+    "js-expression-evaluator": "https://github.com/rreusser/js-expression-eval#cleanup-for-npm"
+  },
+  "semistandard": {
+    "globals": [
+      "describe",
+      "it",
+      "beforeEach"
+    ]
+  }
+}

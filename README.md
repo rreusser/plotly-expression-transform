@@ -4,7 +4,7 @@
 
 ## Introduction
 
-This module applies the transform <em>dvar ← f(dvar, ivars)</em> where `dvar` is a dependent variable and `ivar` is a single independent variable or a list of independent variables. Currently only supports one-dimensional data. 
+This module applies the transform `dvar ← f(dvar, ivars)` where `dvar` is a dependent variable and `ivar` is a single independent variable or a list of independent variables. Currently only supports one-dimensional data. 
 
 ## Installation
 Currently requires experimental plotly.js PR for transforms. Not (yet?) published to npm. Can add to `package.json` from repo directly:

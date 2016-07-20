@@ -3,8 +3,41 @@
 html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
+  min-height: 100%;
+  overflow: hidden;
 }
 
 #expr {
   width: 400px;
+}
+
+#eq {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10000;
+}
+
+#controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.field label {
+  font-family: monospace;
+  width: 100px;
+  display: inline-block;
+  text-align: right;
+}
+
+.field {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+.field input {
+  padding: 5px;
 }

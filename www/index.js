@@ -3,6 +3,11 @@
 var Plotly = require('plotly.js');
 var math = require('mathjs');
 
+var xmaxEl = document.getElementById('xmax');
+xmaxEl.addEventListener('input', onlimits);
+var xminEl = document.getElementById('xmin');
+xminEl.addEventListener('input', onlimits);
+
 Plotly.register([require('../')]);
 
 var transform = {
@@ -15,10 +20,8 @@ var y = [];
 var xmin = -20;
 var xmax = 20;
 var n = 1000;
-for (var i = 0; i < n; i++) {
-    x[i] = xmin + (xmax - xmin) * i / (n - 1);
-    y[i] = Math.cos(x[i]) * Math.exp(-Math.pow(x[i] / 4, 2));
-}
+
+onlimits();
 
 Plotly.plot('graph', [{
     x: x,
@@ -26,7 +29,9 @@ Plotly.plot('graph', [{
     type: 'scatter',
     mode: 'lines',
     transforms: [transform]
-}]);
+}], {
+    margin: {t: 30}
+});
 
 var expr = document.getElementById('expr');
 expr.value = transform.expr;
@@ -43,3 +48,29 @@ function onchange () {
 }
 
 expr.addEventListener('input', onchange);
+
+
+function onresize () {
+    var controls = document.getElementById('controls');
+    var controlHeight = controls.offsetHeight;
+
+    Plotly.relayout('graph', {
+        width: window.innerWidth,
+        height: window.innerHeight - controlHeight
+    });
+}
+
+window.addEventListener('resize', onresize);
+window.onload = onresize;
+
+function onlimits () {
+    xmin = parseFloat(xminEl.value);
+    xmax = parseFloat(xmaxEl.value);
+
+    for (var i = 0; i < n; i++) {
+        x[i] = xmin + (xmax - xmin) * i / (n - 1);
+        y[i] = Math.cos(x[i]) * Math.exp(-Math.pow(x[i] / 4, 2));
+    }
+
+    onchange();
+}

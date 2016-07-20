@@ -13,7 +13,7 @@
     "url": "git://github.com/rreusser/plotly-expression-transform.git"
   },
   "scripts": {
-    "start": "budo-less www/index.js:bundle.js --less=www/style.less --live --open --dir www | garnish",
+    "start": "budo-less www/index.js:bundle.js --less=www/style.less --open --dir www | garnish",
     "test": "semistandard && mocha",
     "build:clean": "rm -rf dist",
     "build:js": "browserify www/index.js | uglifyjs -cm > dist/bundle.js",

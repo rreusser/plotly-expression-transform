@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Plotly Expression Transform</title>
+    <title>plotly.js graphing calculator</title>
     <link rel="stylesheet" href="style.css"/>
     <meta charset="utf-8" />
 
@@ -29,13 +29,16 @@
     </a>
 
     <div class="header" id="header">
-      <h1>plotly.js expression transform calculator</h1>
+      <h1>plotly.js on-the-fly graphing calculator</h1>
       <div class="buttonset">
         <button id="plot-1d" class="active">1D</button>
         <button id="plot-2d">2D</button>
         <button id="plot-3d" style="display: none">3D</button>
+        <button id="show-json">Show JSON</button>
       </div>
     </div>
+
+    <div id="json-container" style="display:none;"><pre id="json-content"></pre></div>
 
     <div id="graph"></div>
     <div id="controls">

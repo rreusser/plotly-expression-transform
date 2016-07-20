@@ -66,6 +66,18 @@ body {
   overflow: hidden;
   font-family: 'Computer Modern Serif', serif;
 }
+#json-container {
+  z-index: 100000;
+  position: absolute;
+  background-color: white;
+  border: 1px solid gray;
+  top: 80px;
+  left: 10px;
+  width: calc(80%);
+  max-height: 500px;
+  overflow-y: scroll;
+  padding-left: 10px;
+}
 #graph {
   position: absolute;
   left: 0;
@@ -116,7 +128,8 @@ body {
   padding: 10px;
 }
 .buttonset button {
-  width: 60px;
+  padding-left: 20px;
+  padding-right: 20px;
   height: 25px;
   background-color: #fff;
   border: 1px solid #6793E6;

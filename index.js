@@ -14,12 +14,12 @@ exports.attributes = {
     ivar: {
         valType: 'string',
         arrayOk: true,
-        dflt: undefined
+        dflt: 'x'
     },
     dvar: {
         valType: 'string',
-        dflt: undefined
-    },
+        dflt: 'y'
+    }
 };
 
 exports.supplyDefaults = function(transformIn, fullData, layout) {
@@ -37,61 +37,40 @@ exports.supplyDefaults = function(transformIn, fullData, layout) {
 };
 
 exports.transform = function(data, state) {
-    var newData = data.map(function(trace) {
-        return transformOne(trace, state);
-    });
-
-    return newData;
-};
-
-function transformOne(trace, state) {
-    var i, j, ivar;
+    var i, j, ivars, ivar;
+    var trace = state.fullTrace;
     var transform = state.transform;
-    var expr = transform.expr;
-    var parsedExpr = math.parse(expr);
-    var compiledExpr = math.compile(expr);
-    var npoints = transform.npoints;
-    var xmin = transform.xmin;
-    var xmax = transform.xmax;
+    var dvar = transform.dvar;
 
-    var vars = {};
-    var varNames = [];
+    var compiledExpr = math.compile(transform.expr);
 
-    if (transform.dvar) {
-        var dvar = vars[transform.dvar] = trace[transform.dvar];
-        varNames.push(transform.dvar);
-    }
-    if (transform.ivar) {
-        if (Array.isArray(transform.ivar)) {
-            for (i = 0; i < transform.ivar.length; i++) {
-                ivar = transform.ivar;
-                vars[ivar] = trace[ivar];
-                varNames.push(ivar);
-            }
-        } else {
-            vars[transform.ivar] = trace[transform.ivar];
-            varNames.push(transform.ivar);
-        }
+    var vars = {}
+
+    if (dvar) {
+        vars[dvar] = trace[dvar];
     }
 
-    var varNames = Object.keys(vars);
+    if (Array.isArray(transform.ivar)) {
+        ivars = transform.ivar;
+    } else {
+        ivars = [transform.ivar];
+    }
 
-    //if (npoints && npoints > 0) {
-        //for (i = 0; i < npoints; i++) {
-            //x[i] = xmin + (xmax - xmin) * i / (npoints - 1);
-        //}
-    //}
+    // Clone all the trace data:
+    var out = trace[dvar] = trace[dvar].slice(0);
 
-    var len = dvar.length;
-    for (i = 0; i < len; i++) {
-        var vals = {};
-        for (j = 0; j < varNames.length; j++) {
-            var varName = varNames[j];
-            vals[varName] = vars[varName][i];
+    var scope = {};
+
+    for (i = 0; i < out.length; i++) {
+        scope[dvar] = trace[dvar][i];
+
+        for (j = 0; j < transform.ivar.length; j++) {
+            ivar = transform.ivar[j];
+            scope[ivar] = trace[ivar][i];
         }
 
-        dvar[i] = compiledExpr.eval(vals);
+        out[i] = compiledExpr.eval(scope);
     }
 
-    return trace;
-}
+    return data;
+};

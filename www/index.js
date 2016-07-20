@@ -7,9 +7,7 @@ Plotly.register([require('../')]);
 
 var transform = {
     type: 'expression',
-    expr: 'x * 0.01 + y^2',
-    ivar: ['x'],
-    dvar: 'y'
+    expr: 'x * 0.01 + y^2'
 };
 
 var x = [];
@@ -31,12 +29,15 @@ Plotly.plot('graph', [{
 }]);
 
 var expr = document.getElementById('expr');
+expr.value = transform.expr;
 
 function onchange () {
     try {
         math.compile(expr.value);
         transform.expr = expr.value;
-        Plotly.restyle('graph', {'transform.expr': [transform.expr]}, [0]);
+        Plotly.restyle('graph', {transform: [transform]}, [0]).then(function () {
+            Plotly.redraw('graph');
+        });
     } catch (e) {
     }
 }

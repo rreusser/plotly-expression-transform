@@ -1,4 +1,5 @@
 @import 'corner';
+@import 'fonts';
 
 html, body {
   margin: 0;
@@ -6,6 +7,38 @@ html, body {
   height: 100%;
   min-height: 100%;
   overflow: hidden;
+  font-family: 'Computer Modern Serif', serif;
+}
+
+#json-container {
+  z-index: 100000;
+  position: absolute;
+  background-color: white;
+  border: 1px solid gray;
+  top: 80px;
+  left: 10px;
+  width: calc(100% - 20px);
+  max-height: 500px;
+  overflow-y: scroll;
+  padding-left: 10px;
+}
+
+#graph {
+  position: absolute;
+  left: 0;
+}
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+}
+
+.header h1 {
+  margin: 0;
+  padding-left: 10px;
+  padding-top: 10px;
 }
 
 #expr {
@@ -41,3 +74,38 @@ html, body {
 .field input {
   padding: 5px;
 }
+
+.fieldgroup {
+  display: inline-block;
+}
+@blue: #6793E6;
+@white: #fff;
+
+.buttonset {
+  padding: 10px;
+}
+
+.buttonset button {
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 25px;
+  background-color: @white;
+  border: 1px solid @blue;
+  color: @blue;
+  outline: none;
+  cursor: pointer;
+}
+
+.buttonset button:hover {
+  background-color: darken(@white, 5%);
+}
+
+.buttonset button.active {
+  background-color: @blue;
+  color: @white;
+}
+
+.buttonset button.active:hover {
+  background-color: darken(@blue, 10%);
+}
+

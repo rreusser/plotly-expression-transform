@@ -42,7 +42,7 @@ exports.transform = function(data, state) {
     var transform = state.transform;
     var dvar = transform.dvar;
 
-    var compiledExpr = math.compile(transform.expr);
+    var compiledExpr = math.compile(transform.expr.split(','));
 
     var vars = {}
 
@@ -61,15 +61,57 @@ exports.transform = function(data, state) {
 
     var scope = {};
 
-    for (i = 0; i < out.length; i++) {
-        scope[dvar] = trace[dvar][i];
+    var dim = 0;
+    var ptr = out;
+    while(Array.isArray(ptr)) {
+        dim++;
+        ptr = ptr[0];
+    }
 
-        for (j = 0; j < transform.ivar.length; j++) {
-            ivar = transform.ivar[j];
-            scope[ivar] = trace[ivar][i];
-        }
+    out = trace[dvar] = [];
 
-        out[i] = compiledExpr.eval(scope);
+    switch (dim) {
+        case 1:
+            var n = Math.max(out.length, trace[transform.ivar[0]].length);
+
+            for (i = 0; i < n; i++) {
+                scope[dvar] = trace[dvar][i];
+
+                if (scope[dvar] === undefined) {
+                    scope[dvar] = 0;
+                }
+
+                for (j = 0; j < transform.ivar.length; j++) {
+                    ivar = transform.ivar[j];
+                    scope[ivar] = trace[ivar][i];
+                }
+
+                for(var l = 0; l < compiledExpr.length; l++) {
+                    out[i] = compiledExpr[l].eval(scope);
+                }
+            }
+            break;
+        case 2:
+            var len = [trace[transform.ivar[0]].length, trace[transform.ivar[1]].length];
+
+            for (i = 0; i < len[0]; i++) {
+                scope[transform.ivar[0]] = trace[transform.ivar[0]][i];
+
+                if (!out[i]) {
+                    out[i] = [];
+                }
+
+                for (j = 0; j < len[1]; j++) {
+                    scope[transform.ivar[1]] = trace[transform.ivar[1]][j];
+                    scope[dvar] = trace[dvar][i][j];
+
+                    for(var l = 0; l < compiledExpr.length; l++) {
+                        out[i][j] = compiledExpr[l].eval(scope);
+                    }
+                }
+            }
+
+            break;
     }
 
     return data;

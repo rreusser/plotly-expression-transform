@@ -12,7 +12,7 @@ Not (yet?) published to npm. Can add to `package.json` from repo directly:
 
 ## Example
 
-``javascript
+1``javascript
 var Plotly = require('plotly.js');
 
 Plotly.register([require('plotly-expression-transform')]);

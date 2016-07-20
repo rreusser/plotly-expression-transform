@@ -2,6 +2,10 @@
 
 > A plotly transform for evaluating arbitrary functions
 
+## Introduction
+
+This module applies the transform <em>dvar ← f(dvar, ivars)</em> where `dvar` is a dependent variable and `ivar` is a single independent variable or a list of independent variables. Currently only supports one-dimensional data. 
+
 ## Installation
 Currently requires experimental plotly.js PR for transforms. Not (yet?) published to npm. Can add to `package.json` from repo directly:
 
@@ -17,15 +21,14 @@ var Plotly = require('plotly.js');
 Plotly.register([require('plotly-expression-transform')]);
 
 Plotly.plot('graph', [{
-    x: [1],
-    y: [1],
-    transforms: [{
+    x: [...],
+    y: [...],
+    transforms: {
         type: 'expression',
-        expr: 'cos(x) * exp(-(x / 4)^2)',
-        xmin: -20,
-        xmax: 20,
-        npoints: 1000,
-    }]
+        expr: 'x * 0.01 + y^2',
+        dvar: 'y',
+        ivar: 'x'
+    }
 }]);
 
 ```

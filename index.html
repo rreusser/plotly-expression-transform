@@ -3,6 +3,21 @@
     <title>Plotly Expression Transform</title>
     <link rel="stylesheet" href="style.css"/>
     <meta charset="utf-8" />
+
+    <meta name="site" content="Ricky Reusser" />
+    <meta name="title" content="Plotly.js transform-based graphing calculator (Experimental!)" />
+    <meta name="description" content="A plotly.js graphing calculator that calculates on the fly using the forthcoming transform feature" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Plotly.js transform-based graphing calculator (Experimental!)" />
+    <meta name="twitter:site" content="@rickyreusser" />
+    <meta name="twitter:description" content="A plotly.js graphing calculator that calculates on the fly using the forthcoming transform feature" />
+    <meta name="twitter:image" content="http://rickyreusser.com/plotly-expression-transform/images/screenshot.png" />
+
+    <meta name="og:image" content="http://rickyreusser.com/plotly-expression-transform/images/screenshot.png" />
+    <meta name="og:site_name" content="Ricky Reusser" />
+    <meta name="og:title" content="Plotly.js transform-based graphing calculator (Experimental!)" />
+    <meta name="og:description" content="A plotly.js graphing calculator that calculates on the fly using the forthcoming transform feature" />
   </head>
   <body>
     <a href="https://github.com/rreusser/plotly-expression-transform" class="github-corner">
@@ -13,19 +28,50 @@
       </svg>
     </a>
 
+    <div class="header" id="header">
+      <h1>plotly.js expression transform calculator</h1>
+      <div class="buttonset">
+        <button id="plot-1d" class="active">1D</button>
+        <button id="plot-2d">2D</button>
+        <button id="plot-3d" style="display: none">3D</button>
+      </div>
+    </div>
+
     <div id="graph"></div>
     <div id="controls">
       <div class="field">
         <label for="expr">expression:</label>
         <input id="expr" type="text">
       </div>
-      <div class="field">
-        <label for="xmin">xmin:</label>
-        <input id="xmin" type="text" value="-20">
+      <div class="fieldgroup" id="plot-1d-controls">
+        <div class="field">
+          <label for="xmin">xmin:</label>
+          <input id="xmin" type="text" value="-20">
+        </div>
+        <div class="field">
+          <label for="xmax">xmax:</label>
+          <input id="xmax" type="text" value="20">
+        </div>
       </div>
-      <div class="field">
-        <label for="xmax">xmax:</label>
-        <input id="xmax" type="text" value="20">
+      <div class="fieldgroup" id="plot-2d-controls" style="display: none;">
+        <div class="field">
+          <label for="ymin">ymin:</label>
+          <input id="ymin" type="text" value="-20">
+        </div>
+        <div class="field">
+          <label for="ymax">ymax:</label>
+          <input id="ymax" type="text" value="20">
+        </div>
+      </div>
+      <div class="fieldgroup" id="plot-3d-controls" style="display: none;">
+        <div class="field">
+          <label for="zmin">zmin:</label>
+          <input id="zmin" type="text" value="-20">
+        </div>
+        <div class="field">
+          <label for="zmax">zmax:</label>
+          <input id="zmax" type="text" value="20">
+        </div>
       </div>
     </div>
     <script src="bundle.js"></script>

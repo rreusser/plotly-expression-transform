@@ -31,7 +31,7 @@
     "plotly.js": "file:../plotly.js"
   },
   "dependencies": {
-    "js-expression-evaluator": "https://github.com/rreusser/js-expression-eval#cleanup-for-npm"
+    "mathjs": "^3.3.0"
   },
   "semistandard": {
     "globals": [

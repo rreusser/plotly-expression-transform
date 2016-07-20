@@ -2,6 +2,14 @@
 
 > A plotly transform for evaluating arbitrary functions
 
+## Installation
+
+Not (yet?) published to npm. Can add to `package.json` from repo directly:
+
+```javscript
+  "plotly-expresson-transform": "https://github.com/rreusser/plotly-expression-transform.git"
+```
+
 ## Example
 
 ``javascript

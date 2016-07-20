@@ -1,7 +1,7 @@
 'use strict';
 
 var Lib = require('plotly.js/src/lib');
-var Parser = window.Parser = require('js-expression-eval').Parser;
+var Parser = require('js-expression-eval').Parser;
 
 exports.moduleType = 'transform';
 exports.name = 'expression';
@@ -55,8 +55,6 @@ function transformOne(trace, state) {
     var npoints = state.transform.npoints;
     var xmin = state.transform.xmin;
     var xmax = state.transform.xmax;
-
-    console.log('npoints, xmin, xmax:', npoints, xmin, xmax);
 
     function evaluate (x) {
         return parsedExpr.evaluate({x: x});

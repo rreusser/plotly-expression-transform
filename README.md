@@ -35,6 +35,10 @@ Plotly.plot('graph', [{
 
 ```
 
+## To Do
+
+Better conflict resolution. What's the right size? The size of the independent variable? Or the size of the dependent variable? Zeros data if they don't match? Also `dvar` and `ivar` is bad. It should match independent variables to specific axes of the dependent variable for dimension `> 1`. Open an issue if you're (miraculously) reading this, have a good idea, and care.
+
 ## License
 
 &copy; 2016 Ricky Reusser. MIT License.

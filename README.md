@@ -2,12 +2,14 @@
 
 > A plotly transform for evaluating arbitrary functions
 
+[![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
+
 ## Introduction
 
-This module applies the transform `dvar ← f(dvar, ivar)` where `dvar` is a dependent variable and `ivar` is a single independent variable (or an array of independent variables). Currently only supports one-dimensional data. 
+Highly experimental. Have realized I did the syntax all wrong. This module applies the transform `dvar ← f(dvar, ivar)` where `dvar` is a dependent variable and `ivar` is a single independent variable (or an array of independent variables).
 
 ## Installation
-Currently requires experimental plotly.js PR for transforms. Not (yet?) published to npm. Can add to `package.json` from repo directly:
+Currently requires experimental plotly.js PR for transforms. Example requires unpublished module. Not published to npm. Can add to `package.json` from repo directly:
 
 ```javscript
   "plotly-expresson-transform": "https://github.com/rreusser/plotly-expression-transform.git"
